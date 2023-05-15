@@ -46,7 +46,7 @@ LRU主要会用在Buffer Pool Manager里面来做缓冲池管理。如何把buff
 
 推荐实现方法：Map+LinkedList。双链表+哈希表。
 
-![image-20230515111921893](images/image-20230515111921893-16841207651191.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/9f5e4b61-9e7d-4b24-a199-cc6535342081)
 
 主要要实现：lru_replace.h中的这四个方法：
 
