@@ -46,7 +46,7 @@ LRU主要会用在Buffer Pool Manager里面来做缓冲池管理。如何把buff
 
 推荐实现方法：Map+LinkedList。双链表+哈希表。
 
-![image-20230515111921893](images/image-20230515111921893-16841207651191.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/9f5e4b61-9e7d-4b24-a199-cc6535342081)
 
 主要要实现：lru_replace.h中的这四个方法：
 
@@ -58,7 +58,8 @@ unpin：表示没人用，可以安全删除，多次unpin是无效的（或者�
 
 size：记录目前有多少页，注意要小于buffer pool manager的大小
 
-![image-20230515112105907](images/image-20230515112105907-16841208677932.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/9fec94f0-a6b3-435b-8527-3ca7a60f2c90)
+
 
 frame_id_t其实就是int32_t
 
@@ -70,7 +71,8 @@ frame_id_t其实就是int32_t
 
 `unordered_map<frame_id_t,std::list<frame_id_t>::iterator>`第二个参数是链表节点。
 
-![image-20230515142655696](images/image-20230515142655696-168413201723510.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/b3d74e2e-36cc-4a58-a836-1eff4d16400b)
+
 
 补充一种奇怪的写法：
 
@@ -88,21 +90,21 @@ auto LRUReplacer::Victim(frame_id_t *frame_id) -> bool { return false; }
 
 就是拿出最后的指针，然后把他从链表和map中删除，map中删除的是对应的索引。
 
-![image-20230515120211338](images/image-20230515120211338-16841233328693.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/73466a28-9263-4745-8bcf-bf0f7befb176)
 
 
 
 - 实现对应的pin函数：(pin删除页的操作)
 
-![image-20230515142957525](images/image-20230515142957525.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/00a91b1d-6a28-499b-98bc-ddd00b677b2e)
 
 
 
 - 实现对应的unpin功能：
 
-![image-20230515143543418](images/image-20230515143543418-168413254603811.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/c4f8d11f-ab88-4bb3-b457-637fd44c8842)
 
 - 最后返回size：
 
-![image-20230515143933559](images/image-20230515143933559.png)
+![image](https://github.com/GauHar666/CMU-15445-lab/assets/100465185/68ceb27a-8ffe-4cda-b6a3-74e26630b1f9)
 
