@@ -35,7 +35,7 @@ auto LRUReplacer::Victim(frame_id_t *frame_id) -> bool {
     return true;
 }
 
-//去除某个指定的页
+//去除某个指定的页，有人用 它不能淘汰
 void LRUReplacer::Pin(frame_id_t frame_id) {
     std::lock_guard<std::mutex> lock(mutex_);
     if(speed_map_.count(frame_id)>0){
@@ -44,7 +44,7 @@ void LRUReplacer::Pin(frame_id_t frame_id) {
     }
 }
 
-//放回指定的页
+//放回指定的页，没人用了 就放回LRU链表中
 void LRUReplacer::Unpin(frame_id_t frame_id) {
     std::lock_guard<std::mutex> lock(mutex_);
     if(speed_map_.count(frame_id)==0){
